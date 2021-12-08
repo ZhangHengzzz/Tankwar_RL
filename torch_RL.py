@@ -11,7 +11,7 @@ import os
 
 sys.path.append("game/")
 
-GAME = 'bird'  # the name of the game being played for log files
+GAME = 'tankwar'  # the name of the game being played for log files
 GAMMA = 0.99  # decay rate of past observations
 OBSERVE = 1000.  # timesteps to observe before training
 EXPLORE = 2000000.  # frames over which to anneal epsilon
