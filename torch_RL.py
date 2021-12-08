@@ -210,7 +210,7 @@ if __name__ == '__main__':
         action = brain.getAction()
         nextObservation, _, reward, terminal = game.next(action)
         nextObservation = preprocess(nextObservation)
-        print(nextObservation.shape)
+        # print(nextObservation.shape)
         brain.setPerception(nextObservation, action, reward, terminal)
         # brain.currentState = np.append(
         #     brain.currentState[1:, :, :], nextObservation, axis=0)
