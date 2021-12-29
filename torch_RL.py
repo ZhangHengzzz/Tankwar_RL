@@ -184,6 +184,35 @@ class BrainDQNMain(object):
             (observation, observation, observation, observation), axis=0)
         print(self.currentState.shape)
 
+    def run(self):
+        from State import AI_tank_war
+
+        game = AI_tank_war()
+        game.reset()
+
+        actions = 5
+        self.load()
+        action0 = 0
+        observation0, _, reward0, terminal = game.next(action0)
+        observation0 = cv2.cvtColor(cv2.resize(
+            observation0, (width, height)), cv2.COLOR_BGR2GRAY)
+        ret, observation0 = cv2.threshold(observation0, 1, 255, cv2.THRESH_BINARY)
+        self.setInitState(observation0)
+        print(self.currentState.shape)
+
+        while True:
+
+            action = self.getAction()
+            nextObservation, _, reward, terminal = game.next(action)
+            nextObservation = preprocess(nextObservation)
+            self.currentState = np.append(
+                self.currentState[1:, :, :], nextObservation, axis=0)
+            game.show()
+            if not terminal:
+                nextObservation, _, reward, terminal = game.next(action)
+                nextObservation = preprocess(nextObservation)
+                self.setPerception(nextObservation, action, reward, terminal)
+                game.reset()
 
 if __name__ == '__main__':
     from State import AI_tank_war
