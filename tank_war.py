@@ -388,7 +388,14 @@ class TankWar:
                 self.sflag = False
             if self.pflag:
                 self.__create_sprite()
+                start_time = pygame.time.get_ticks()
+                font = pygame.font.SysFont("time", 32)
                 while not self.sflag:
+                    end_time = pygame.time.get_ticks()
+                    time = (end_time - start_time) // 1000
+                    text_surface = font.render("time:" + str(time)+"s", True, "blue")
+                    self.screen.blit(text_surface, (0, 0))
+                    pygame.display.update()
                     self.screen.fill(Settings.SCREEN_COLOR)
                     # 1、设置刷新帧率
                     self.clock.tick(Settings.FPS)
